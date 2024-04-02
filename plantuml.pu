@@ -1,0 +1,71 @@
+@startuml 'zoo'
+class models.Animal{
+    nombre:string
+    Caracteristicas:string
+    especie_id:integer
+}
+class models.Especie{
+    nombre:string
+    descripcion:string
+}
+class models.Recinto{
+    nombre:string
+    capacidad:integer
+    clima:string
+}
+class models.Cuidador{
+    nombre:string
+    edad:integer
+    salario:integer
+}
+class models.CuidadorEspecialidad{
+    cuidador_id:integer
+    especialidad_id:integer
+}
+class models.Actividad{
+    nombre:string
+    descripcion:string
+    dia:string
+    horario:string
+}
+class models.AnimalCuidador{
+    cuidador_id_id:integer
+    animal_id:integer
+}
+class models.ActividadAnimal{
+    actividad_id:integer
+    animal_id:integer
+}
+class models.AnimalRecinto{
+    animal_id:integer
+    recinto_id:integer
+}
+
+class controllers.Animal{
+    resource()
+}
+class controllers.Especie{
+    resource()
+}
+class controllers.Recinto{
+    resource()
+}
+class controllers.Cuidador{
+    resource()
+}
+class controllers.Actividad{
+    resource()
+}
+
+
+models.Animal"1"-->"*" models.AnimalRecinto
+models.Animal"1"-->"*" models.ActividadAnimal
+models.Animal"1" -- "*" models.AnimalCuidador
+models.Recinto"1"-->"*" models.AnimalRecinto
+models.Actividad"1"-->"*" models.ActividadAnimal
+models.Cuidador"1" -- "*" models.AnimalCuidador
+models.Cuidador"1" -- "*" models.CuidadorEspecialidad
+models.Especie"1"*--"*" models.Animal
+models.Especie"1" -- "*" models.CuidadorEspecialidad
+
+@enduml
